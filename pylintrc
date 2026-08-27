@@ -6,7 +6,7 @@ persistent=no
 extension-pkg-whitelist=ciso8601
 
 [BASIC]
-good-names=id,i,j,k
+good-names=id,i,j,k,AUTH_ENDPOINT,HOME_ENDPOINT,SETUP_ENDPOINT
 
 [MESSAGES CONTROL]
 # Reasons disabled:
