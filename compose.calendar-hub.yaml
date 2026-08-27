@@ -1,0 +1,48 @@
+services:
+  calendar-hub:
+    build:
+      context: .
+      dockerfile: Dockerfile.calendar-hub
+    env_file:
+      - .env.calendar-hub
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8000"
+    volumes:
+      - pyicloud-session:/data/pyicloud
+    secrets:
+      - google-token
+      - icloud-password
+      - zoom-client-secret
+    depends_on:
+      redis:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pyicloud-session:
+  redis-data:
+
+secrets:
+  google-token:
+    file: ./secrets/google-token.json
+  icloud-password:
+    file: ./secrets/icloud-password
+  zoom-client-secret:
+    file: ./secrets/zoom-client-secret
