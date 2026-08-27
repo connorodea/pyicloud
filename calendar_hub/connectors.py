@@ -38,7 +38,8 @@ class ConnectorAuthenticationError(ConnectorError):
 class BusyCalendarConnector(Protocol):
     name: str
 
-    def busy(self, start: datetime, end: datetime) -> list[BusyInterval]: ...
+    def busy(self, start: datetime, end: datetime) -> list[BusyInterval]:
+        ...
 
 
 @dataclass(frozen=True)

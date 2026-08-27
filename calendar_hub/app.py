@@ -58,9 +58,9 @@ def create_app(
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-        response.headers["Permissions-Policy"] = (
-            "camera=(), microphone=(), geolocation=(), payment=()"
-        )
+        response.headers[
+            "Permissions-Policy"
+        ] = "camera=(), microphone=(), geolocation=(), payment=()"
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; "
             "style-src 'self'; frame-src https://challenges.cloudflare.com; "

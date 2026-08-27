@@ -174,5 +174,12 @@ class PyiCloudServiceMock(base.PyiCloudService):
         """Set up pyicloud service mock."""
         base.PyiCloudSession = PyiCloudSessionMock
         base.PyiCloudService.__init__(
-            self, apple_id, password, cookie_directory, verify, client_id, with_family, china_mainland
+            self,
+            apple_id,
+            password,
+            cookie_directory,
+            verify,
+            client_id,
+            with_family,
+            china_mainland,
         )
