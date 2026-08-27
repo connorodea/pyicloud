@@ -65,3 +65,8 @@ desktop.ini
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Calendar Hub runtime credentials and local configuration
+.venv*/
+.env.calendar-hub
+secrets/

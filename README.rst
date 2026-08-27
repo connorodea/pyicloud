@@ -34,6 +34,17 @@ PyiCloud is a module which allows pythonistas to interact with iCloud webservice
 
 At its core, PyiCloud connects to iCloud using your username and password, then performs calendar and iPhone queries against their API.
 
+Calendar Hub
+============
+
+This fork includes a production-oriented unified availability and booking service
+for Google Calendar, read-only iCloud Calendar, optional ICS feeds, Zoom video
+appointments, and phone appointments. Google Calendar owns and sends invitations;
+other providers contribute private busy intervals only.
+
+See `CALENDAR_HUB.md <CALENDAR_HUB.md>`_ for architecture, credentials, security,
+testing, and Hetzner deployment instructions.
+
 
 Authentication
 ==============

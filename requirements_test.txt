@@ -2,3 +2,5 @@ black==22.1.0
 pylint==2.12.2
 pylint-strict-informational==0.1
 pytest==7.0.1
+# Black 22.1 imports click._unicodefun, removed in newer Click releases.
+click<8.1

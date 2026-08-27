@@ -1,0 +1,44 @@
+name: Calendar Hub
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "calendar_hub/**"
+      - "tests_calendar_hub/**"
+      - "requirements-calendar-hub*.txt"
+      - "Dockerfile.calendar-hub"
+      - "compose.calendar-hub.yaml"
+      - ".github/workflows/calendar-hub.yml"
+  push:
+    branches: [master]
+    paths:
+      - "calendar_hub/**"
+      - "tests_calendar_hub/**"
+      - "requirements-calendar-hub*.txt"
+      - "Dockerfile.calendar-hub"
+      - "compose.calendar-hub.yaml"
+      - ".github/workflows/calendar-hub.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . -r requirements-calendar-hub-test.txt ruff
+      - name: Lint
+        run: ruff check calendar_hub tests_calendar_hub
+      - name: Test
+        run: python -m pytest -q tests_calendar_hub
+      - name: Build container
+        run: docker build -f Dockerfile.calendar-hub -t calendar-hub:test .
